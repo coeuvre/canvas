@@ -225,17 +225,17 @@ CANVASAPI CanvasStyle canvasGetStrokeStyle(CanvasRenderingContext2D *ctx);
 // Adds a color stop with the given color to the gradient at the given offset.
 // 0.0 is the offset at one end of the gradient, 1.0 is the offset at the other
 // end.
-CANVASAPI void CanvasGradientAddColorStop(CanvasGradient *gradient,
+CANVASAPI void canvasGradientAddColorStop(CanvasGradient *gradient,
                                           float offset, CanvasColor *color);
 
 // Returns a CanvasGradient object that represents a linear gradient that paints
 // along the line given by the coordinates represented by the arguments.
-CANVASAPI CanvasGradient *CanvasCreateLinearGradient(
+CANVASAPI CanvasGradient *canvasCreateLinearGradient(
     CanvasRenderingContext2D *ctx, float x0, float y0, float x1, float y1);
 
 // Returns a CanvasGradient object that represents a radial gradient that paints
 // along the cone given by the circles represented by the arguments.
-CANVASAPI CanvasGradient *CanvasCreateRadialGradient(
+CANVASAPI CanvasGradient *canvasCreateRadialGradient(
     CanvasRenderingContext2D *ctx, float x0, float y0, float r0, float x1,
     float y1, float r1);
 
@@ -248,12 +248,45 @@ enum CanvasPatternRepetition {
   CANVAS_PATTERN_REPETITION_NO_REPEAT,
 };
 
-CANVASAPI CanvasPattern *CanvasCreatePattern(
+CANVASAPI CanvasPattern *canvasCreatePattern(
     CanvasRenderingContext2D *ctx, CanvasImage *image,
     CanvasPatternRepetition repetition);
 
-CANVASAPI void CanvasPatternSetTransform(CanvasPattern *pattern,
+CANVASAPI void canvasPatternSetTransform(CanvasPattern *pattern,
                                          CanvasMatrix2D transform);
 
 // ----------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+// Shadows
+
+// Change the shadow color
+CANVASAPI void canvasSetShadowColor(CanvasRenderingContext2D *ctx,
+                                    CanvasColor *color);
+
+// Returns the current shadow color.
+CANVASAPI CanvasColor *canvasGetShadowColor(CanvasRenderingContext2D *ctx);
+
+// Change the shadow offset
+CANVASAPI void canvasSetShadowOffsetX(CanvasRenderingContext2D *ctx,
+                                      float offsetX);
+
+// Returns the current shadow offset
+CANVASAPI float canvasGetShadowOffsetX(CanvasRenderingContext2D *ctx);
+
+// Change the shadow offset
+CANVASAPI void canvasSetShadowOffsetY(CanvasRenderingContext2D *ctx,
+                                      float offsetY);
+
+// Returns the current shadow offset
+CANVASAPI float canvasGetShadowOffsetY(CanvasRenderingContext2D *ctx);
+
+// Change the blur level
+CANVASAPI void canvasSetShadowBlur(CanvasRenderingContext2D *ctx, float blur);
+
+// Returns the current level of blur applied to shadows.
+CANVASAPI float canvasGetShadowBlur(CanvasRenderingContext2D *ctx);
+
+// ----------------------------------------------------------------------------
+
 #endif  // CANVAS_CANVAS_H

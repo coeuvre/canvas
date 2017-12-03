@@ -289,4 +289,18 @@ CANVASAPI float canvasGetShadowBlur(CanvasRenderingContext2D *ctx);
 
 // ----------------------------------------------------------------------------
 
+// ----------------------------------------------------------------------------
+// Filters
+
+typedef struct CanvasFilter CanvasFilter;
+
+// Change the filter
+CANVASAPI void canvasSetFilter(CanvasRenderingContext2D *ctx,
+                               CanvasFilter *filter);
+
+// Returns the current filter.
+CANVASAPI CanvasFilter *canvasGetFilter(CanvasRenderingContext2D *ctx);
+
+// ----------------------------------------------------------------------------
+
 #endif  // CANVAS_CANVAS_H

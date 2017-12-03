@@ -3,17 +3,18 @@
 
 #define CANVASAPI extern
 
-// Spec: https://html.spec.whatwg.org/multipage/canvas.html
+// HTML Canvas Spec https://html.spec.whatwg.org/multipage/canvas.html
 
 // ----------------------------------------------------------------------------
 // Context
-// ----------------------------------------------------------------------------
 
 typedef struct CanvasRenderingContext2D CanvasRenderingContext2D;
 
 CANVASAPI CanvasRenderingContext2D *canvasCreateContext(void);
 
 CANVASAPI void canvasDestroyContext(CanvasRenderingContext2D *ctx);
+
+// ----------------------------------------------------------------------------
 
 // ----------------------------------------------------------------------------
 // Canvas state
@@ -277,6 +278,50 @@ CANVASAPI void canvasSetGlobalCompositeOperation(
 // Change the composition operation. Unknown values are ignored.
 CANVASAPI CanvasCompositeOperation
 canvasGetGlobalCompositeOperation(CanvasRenderingContext2D *ctx);
+
+// ----------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+// Image smoothing
+//
+// Objects that implement the CanvasImageSmoothing interface have attributes
+// that control how image smoothing is performed.
+//
+// The imageSmoothingEnabled attribute, on getting, must return the last value
+// it was set to. On setting, it must be set to the new value. When the object
+// implementing the CanvasImageSmoothing interface is created, the attribute
+// must be set to true.
+//
+// The imageSmoothingQuality attribute, on getting, must return the last value
+// it was set to. On setting, it must be set to the new value. When the object
+// implementing the CanvasImageSmoothing interface is created, the attribute
+// must be set to "low".
+
+// Change whether images are smoothed (true) or not (false).
+CANVASAPI void canvasSetImageSmoothingEnabled(CanvasRenderingContext2D *ctx,
+                                              int imageSmoothingEnabled);
+
+// Returns whether pattern fills and the drawImage() method will attempt to
+// smooth images if their pixels don't line up exactly with the display, when
+// scaling images up.
+CANVASAPI int canvasGetImageSmoothingEnabled(CanvasRenderingContext2D *ctx);
+
+typedef enum CanvasImageSmoothingQuality CanvasImageSmoothingQuality;
+enum CanvasImageSmoothingQuality {
+  CANVAS_IMAGE_SMOOTHING_QUANLITY_LOW,
+  CANVAS_IMAGE_SMOOTHING_QUANLITY_MEDIUM,
+  CANVAS_IMAGE_SMOOTHING_QUANLITY_HIGH,
+};
+
+// Change the preferred quality of image smoothing. The possible values are
+// "low", "medium" and "high". Unknown values are ignored.
+CANVASAPI void canvasSetImageSmoothingQuality(
+    CanvasRenderingContext2D *ctx,
+    CanvasImageSmoothingQuality imageSmoothingQuality);
+
+// Returns the current image-smoothing-quality preference.
+CANVASAPI CanvasImageSmoothingQuality
+canvasGetImageSmoothingQuality(CanvasRenderingContext2D *ctx);
 
 // ----------------------------------------------------------------------------
 
